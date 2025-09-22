@@ -99,7 +99,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(1000);
-  myprintf("Starting the freertos program.....\n");
+  myprintf("Starting the freertos program.....\r\n");
 
   /* USER CODE END 2 */
 

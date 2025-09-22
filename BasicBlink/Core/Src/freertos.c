@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
+#include "stm32h7xx_nucleo.h"
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
@@ -125,7 +126,8 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1000);
+    BSP_LED_Toggle(LED_YELLOW);
+    osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
