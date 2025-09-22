@@ -47,7 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+volatile uint8_t led_is_on = 0;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
@@ -127,6 +127,7 @@ void StartDefaultTask(void const * argument)
   for(;;)
   {
     BSP_LED_Toggle(LED_YELLOW);
+    led_is_on = !led_is_on;
     osDelay(500);
   }
   /* USER CODE END StartDefaultTask */

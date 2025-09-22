@@ -22,6 +22,7 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
+#include <stdint.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -70,7 +71,7 @@ void Error_Handler(void);
 #define PH1_MCU_GPIO_Port GPIOH
 
 /* USER CODE BEGIN Private defines */
-
+extern volatile uint8_t led_is_on;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

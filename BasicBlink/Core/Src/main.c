@@ -24,6 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
@@ -49,7 +50,6 @@
 COM_InitTypeDef BspCOMInit;
 
 /* USER CODE BEGIN PV */
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,7 +57,13 @@ void SystemClock_Config(void);
 static void MPU_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-
+void vApplicationIdleHook(void)
+{
+    static uint8_t last_state = 1;
+    if (!led_is_on && last_state)
+        myprintf("Idle over serial\r\n");
+    last_state = led_is_on;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
