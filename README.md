@@ -3,15 +3,18 @@ Relearning FreeRTOS Through 9 Short Projects
 
 ## Board
 
-STM32 NUCLEO-H7A3ZI-Q
-On Board STLINK-V3E
+STM32 NUCLEO-H7A3ZI-Q w/ On Board STLINK-V3E
 
 ## Build PC
 
 OS: Arch Linux x86_64
+
 Kernel: 6.16.8-arch1-1
+
 DE: Cinnamon (CubeMX won't work in Sway)
+
 IDE: Neovim / STM32CubeMX
+
 Misc Packages: arm-non-eabi-gcc (14.2), openocd, stlink
 
 ## Build Instructions
