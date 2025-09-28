@@ -19,6 +19,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
+#include "freertos_task_handles.h"
+#include "portmacro.h"
+#include "projdefs.h"
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
@@ -45,12 +48,14 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+osThreadId Task2Handle =  NULL;
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+void task2_init(void const * argument);
 
 /* USER CODE END FunctionPrototypes */
 
@@ -107,6 +112,8 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+  osThreadDef(Task2, task2_init, osPriorityNormal, 0, 128);
+  Task2Handle = osThreadCreate(osThread(Task2), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }
@@ -132,5 +139,16 @@ void StartDefaultTask(void const * argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+void task2_init(void const * argument)
+{
+    for(;;)
+    {
+        // Task waits for notification
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        // Upon wake it will toggle the led
+        myprintf("Task2 has been notified!\r\n");
+        BSP_LED_Toggle(LED_YELLOW);
+    }
+}
 
 /* USER CODE END Application */

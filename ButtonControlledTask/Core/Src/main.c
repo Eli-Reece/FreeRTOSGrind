@@ -19,6 +19,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "freertos_task_handles.h"
+#include "portmacro.h"
+#include "projdefs.h"
 #include "stm32h7xx_nucleo.h"
 #include "usart.h"
 #include "gpio.h"
@@ -62,7 +65,11 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void BSP_PB_Callback(Button_TypeDef Button) {
-    BSP_LED_Toggle(LED_YELLOW);
+  // if priority of handling task is higher than the priority of the currently
+  // running task, then this will get set to pdTRUE
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+  vTaskNotifyGiveFromISR(Task2Handle, &xHigherPriorityTaskWoken); 
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 /* USER CODE END 0 */
